@@ -4,44 +4,40 @@ const mongoose = require('mongoose');
 
 const courseSchema = mongoose.Schema({
 	name:{
-		type: String,
-		required: true
-	},
-	rating:{
-		type: Number,
-		required: true
-	},
-	hole_count:{
-		type: Number,
-		required: true
-	},
-	course_avg:{
-		type: Number,
-		required: true
-	},
-	played:{
-		type: Boolean,
-		required: true
-	},
-	lat:{
-		type: Number,
-		required: true
-	},
-	lng:{
-		type: Number,
-		required: true
+		type: String
 	},
 	create_date:{
 		type: Date,
 		default: Date.now
 	}
-})
+});
 
 const Course = module.exports = mongoose.model('Course', courseSchema);
 
 
 
 
-module.exports.getCourses = function(callback, limit){
+module.exports.getCourses = (callback, limit) => {
 	Course.find(callback).limit(limit);
+}
+
+module.exports.getCoursesById = (id, callback) => {
+	Course.findById(id, callback);
+}
+
+module.exports.addCourse = (course, callback) => {
+	Course.create(course, callback);
+}
+
+module.exports.updateCourse = (id, course, options, callback) => {
+	let query = { _id: id};
+	let update = {
+		name: course.name
+	}
+	Course.findOneAndUpdate(query, update, options, callback);
+}
+
+module.exports.removeCourse = (id, callback) => {
+	let query = { _id: id};
+	Course.remove(query, callback);
 }
