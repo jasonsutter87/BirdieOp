@@ -35,7 +35,9 @@ module.exports.addRound = (round, callback) => {
 module.exports.updateRound = (id, round, options, callback) => {
 	let query = { _id: id};
 	let update = {
-		name: round.name
+    course: round.course,
+    friends: round.friends,
+    users_score: round.users_score
 	}
 	Round.findOneAndUpdate(query, update, options, callback);
 }

@@ -50,7 +50,14 @@ module.exports.addDisc = (disc, callback) => {
 module.exports.updateDisc = (id, disc, options, callback) => {
 	let query = { _id: id};
 	let update = {
-		name: disc.name
+		name: disc.name,
+    manufacture: disc.manufacture,
+    description: disc.description,
+    disc_type: disc.disc_type,
+    speed: disc.speed,
+    glide: disc.glide,
+    turn: disc.turn,
+    fade: disc.fade    
 	}
 	Disc.findOneAndUpdate(query, update, options, callback);
 }

@@ -38,7 +38,11 @@ module.exports.addHole = (hole, callback) => {
 module.exports.updateHole = (id, hole, options, callback) => {
 	let query = { _id: id};
 	let update = {
-		name: hole.name
+    hole_number: hole.hole_number,
+    par: hole.par,
+    stroke_count: hole.stroke_count,
+    discs_thrown: hole.discs_thrown
+
 	}
 	Hole.findOneAndUpdate(query, update, options, callback);
 }

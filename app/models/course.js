@@ -8,6 +8,9 @@ const courseSchema = mongoose.Schema({
 	rating:{
 		type: Number
 	},
+	difficulty:{
+		type: String
+	},
 	description:{
 		type: String
 	},
@@ -47,7 +50,16 @@ module.exports.addCourse = (course, callback) => {
 module.exports.updateCourse = (id, course, options, callback) => {
 	let query = { _id: id};
 	let update = {
-		name: course.name
+		name: course.name,
+		rating: course.rating,
+		difficulty: course.difficulty,
+		description: course.description,
+		lat: course.lat,
+		lng: course.lng,
+		course_avg: course.course_avg,
+		players_course_avg: course.players_course_avg
+
+
 	}
 	Course.findOneAndUpdate(query, update, options, callback);
 }
