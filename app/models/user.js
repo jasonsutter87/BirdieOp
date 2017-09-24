@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
   email:{
 		type: String
 	},
-  password:{
+  password_hash:{
 		type: String
 	},
   total_average:{
@@ -16,6 +16,9 @@ const userSchema = mongoose.Schema({
 	},
   total_stokes:{
 		type: Number
+	},
+  site_admin:{
+		type: Boolean
 	},
 	create_date:{
 		type: Date,
@@ -41,7 +44,12 @@ module.exports.addUser = (user, callback) => {
 module.exports.updateUser = (id, user, options, callback) => {
 	let query = { _id: id};
 	let update = {
-		name: user.name
+    name: user.name,
+    email: user.email,
+    password_hash: user.password_hash,
+    total_average: user.total_average,
+    total_stokes: user.total_stokes,
+		site_admin: user.site_admin
 	}
 	User.findOneAndUpdate(query, update, options, callback);
 }
