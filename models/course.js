@@ -1,10 +1,27 @@
 const mongoose = require('mongoose');
 
 // Course Schema
-
 const courseSchema = mongoose.Schema({
 	name:{
 		type: String
+	},
+	rating:{
+		type: Number
+	},
+	description:{
+		type: String
+	},
+	lat:{
+		type: Number
+	},
+	lng:{
+		type: Number
+	},
+	course_avg:{
+		type: Number
+	},
+	players_course_avg:{
+		type: Number
 	},
 	create_date:{
 		type: Date,
@@ -14,9 +31,7 @@ const courseSchema = mongoose.Schema({
 
 const Course = module.exports = mongoose.model('Course', courseSchema);
 
-
-
-
+//Course Controller
 module.exports.getCourses = (callback, limit) => {
 	Course.find(callback).limit(limit);
 }
