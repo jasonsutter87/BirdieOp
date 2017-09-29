@@ -22,10 +22,10 @@ router.post('/login', function (req, res) {
     }
 
     if(!user){
-      return res.status(404).send('no user');
+      return res.status(404).send('No user found');
     }
     req.session.user = user;
-    return res.status(200).send('welcome');
+    return res.status(200).send('You have been logged in');
   })
 
 })
@@ -33,7 +33,6 @@ router.post('/login', function (req, res) {
 // define the logout route
 router.get('/logout', function (req, res) {
   req.session.destroy(function(err) {
-    console.log(err)
   })
   res.send('You have been logout')
 })
@@ -42,9 +41,9 @@ router.get('/logout', function (req, res) {
 router.get('/dashboard', function (req, res) {
   // res.send('dashboard')
   if(!req.session.user){
-    return res.status(404).send('failed');
+    return res.status(404).send('Sign in to view desktop');
   }
-  return res.status(200).send('yay');
+  return res.status(200).send('Desktop');
 })
 
 module.exports = router;

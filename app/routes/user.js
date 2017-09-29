@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const {encryptUserPassword} = require('../helpers/users')
 
 //User Models
 const Users = require('../models/user');
@@ -21,12 +22,22 @@ router.get('/', (req, res) => {
 });
 router.post('/', (req, res) =>  {
 	let user = req.body;
-	Users.addUser(user, (err, user) => {
-		if(err){
-			throw err;
-		}
-		res.json(user)
-	})
+
+  Users.findOne({ 'email': user.email }, function (err, userCheck) {
+    if(!userCheck){
+      user.password_hash = encryptUserPassword(user.password_hash)
+    	Users.addUser(user, (err, newUser) => {
+    		if(err){
+    			throw err;
+    		}
+    		res.json(newUser)
+    	})
+    }else{
+      res.send('User already exist');
+    }
+});
+
+
 });
 router.get('/:_id', (req, res) => {
 	Users.getUserById(req.params._id, (err, user) => {

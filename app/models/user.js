@@ -12,13 +12,15 @@ const userSchema = mongoose.Schema({
 		type: String
 	},
   total_average:{
-		type: Number
+		type: Number,
+		default: 0
 	},
   total_courses:{
 		type: Array
 	},
-  total_stokes:{
-		type: Number
+  total_strokes:{
+		type: Number,
+		default: 0
 	},
 	signed_on:{
 		type: Boolean
@@ -53,9 +55,10 @@ module.exports.updateUser = (id, user, options, callback) => {
     name: user.name,
     email: user.email,
     password_hash: user.password_hash,
-    total_average: user.total_average,
-    total_stokes: user.total_stokes,
-		site_admin: user.site_admin
+		total_courses: user.total_courses,
+		site_admin: user.site_admin,
+		total_average: user.total_average,
+		total_strokes: user.total_strokes
 	}
 	User.findOneAndUpdate(query, update, options, callback);
 }
