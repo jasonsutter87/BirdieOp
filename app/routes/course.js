@@ -9,6 +9,12 @@ router.use(function timeLog (req, res, next) {
   next()
 })
 
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // Courses Routes
 router.get('/', function (req, res) {
 	Courses.getCourses((err, courses) => {
