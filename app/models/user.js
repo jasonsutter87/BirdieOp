@@ -14,10 +14,16 @@ const userSchema = mongoose.Schema({
   total_average:{
 		type: Number
 	},
+  total_courses:{
+		type: Array
+	},
   total_stokes:{
 		type: Number
 	},
-  site_admin:{
+	signed_on:{
+		type: Boolean
+	},
+	site_admin:{
 		type: Boolean
 	},
 	create_date:{
@@ -33,7 +39,7 @@ module.exports.getUsers = (callback, limit) => {
 	User.find(callback).limit(limit);
 }
 
-module.exports.getUsersById = (id, callback) => {
+module.exports.getUserById = (id, callback) => {
 	User.findById(id, callback);
 }
 
