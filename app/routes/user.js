@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const {encryptUserPassword} = require('../helpers/users')
+const {encryptUserPassword} = require('../helpers/users');
 
 //User Models
 const Users = require('../models/user');
-
 
 // middleware that is specific to this router
 router.use(function timeLog (req, res, next) {
@@ -36,7 +35,6 @@ router.post('/', (req, res) =>  {
       res.send('User already exist');
     }
 });
-
 
 });
 router.get('/:_id', (req, res) => {

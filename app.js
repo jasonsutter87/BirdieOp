@@ -12,6 +12,7 @@ const user = require('./app/routes/user');
 const session = require('express-session')
 require('dotenv').config()
 
+
 //Connect to mongoose
 mongoose.connect('mongodb://localhost/BirdieOp')
 const db = mongoose.connection;
