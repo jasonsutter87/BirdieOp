@@ -49,9 +49,14 @@ router.post('/login', function (req, res) {
 
 // logout route
 router.get('/logout', function (req, res) {
-  req.session.destroy(function(err) {
-  })
-  res.send('You have been logout')
+  if(req.session.user == undefined){
+      res.send('No user is logged in')
+  }else{
+    req.session.destroy(function(err) {
+    })
+    res.send('You have been logout')
+  }
+
 })
 
 // dashboard route
