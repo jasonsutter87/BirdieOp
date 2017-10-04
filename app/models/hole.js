@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Hole Schema
+/** Hole Schema */
 const holeSchema = mongoose.Schema({
 	hole_number:{
 		type: Number
@@ -22,7 +22,7 @@ const holeSchema = mongoose.Schema({
 
 const Hole = module.exports = mongoose.model('Hole', holeSchema);
 
-//Hole Controller
+/** Hole Controller */
 module.exports.getHoles = (callback, limit) => {
 	Hole.find(callback).limit(limit);
 }

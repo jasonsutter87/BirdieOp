@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// User Schema
+/** User Schema */
 const userSchema = mongoose.Schema({
 	name:{
 		type: String
@@ -36,7 +36,7 @@ const userSchema = mongoose.Schema({
 
 const User = module.exports = mongoose.model('User', userSchema);
 
-//User Controller
+/** User Controller */
 module.exports.getUsers = (callback, limit) => {
 	User.find(callback).limit(limit);
 }

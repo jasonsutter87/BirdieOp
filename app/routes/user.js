@@ -10,7 +10,14 @@ router.use(function timeLog (req, res, next) {
   next()
 })
 
-// User Routes
+/** Headers. */
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+/** Get Users. */
 router.get('/', (req, res) => {
 	Users.getUsers((err, users) => {
 		if(err){
@@ -19,9 +26,14 @@ router.get('/', (req, res) => {
 		res.json(users)
 	})
 });
+
+/** Create User. */
 router.post('/', (req, res) =>  {
 	let user = req.body;
-
+  /**
+    * Finds users email
+    * @param {email} x - users email
+    */
   Users.findOne({ 'email': user.email }, function (err, userCheck) {
     if(!userCheck){
       user.password_hash = encryptUserPassword(user.password_hash)
@@ -34,9 +46,10 @@ router.post('/', (req, res) =>  {
     }else{
       res.send('User already exist');
     }
+  });
 });
 
-});
+/** Get User by ID */
 router.get('/:_id', (req, res) => {
 	Users.getUserById(req.params._id, (err, user) => {
 		if(err){
@@ -45,6 +58,8 @@ router.get('/:_id', (req, res) => {
 		res.json(user)
 	})
 });
+
+/** Update User by ID */
 router.put('/:_id', (req, res) => {
 	const id = req.params._id;
 	const user = req.body;
@@ -55,6 +70,8 @@ router.put('/:_id', (req, res) => {
 		res.json(user)
 	})
 });
+
+/** Delete User by ID */
 router.delete('/:_id', (req, res) => {
 	const id = req.params._id;
 	Users.removeUser(id, function(err, user){

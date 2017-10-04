@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Course Schema
+/** Course Schema */
 const courseSchema = mongoose.Schema({
 	name:{
 		type: String
@@ -34,7 +34,7 @@ const courseSchema = mongoose.Schema({
 
 const Course = module.exports = mongoose.model('Course', courseSchema);
 
-//Course Controller
+/** Course Controller */
 module.exports.getCourses = (callback, limit) => {
 	Course.find(callback).limit(limit);
 }
