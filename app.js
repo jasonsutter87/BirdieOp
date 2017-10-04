@@ -33,5 +33,5 @@ app.use('/api/discs', disc); // mount the index route at the /api/disc path
 app.use('/api/users', user); // mount the index route at the /api/users path
 //
 
-app.listen(3000);
-console.log('Listing on port 3000...');
+app.listen(8000);
+console.log('Listing on port 8000...');
