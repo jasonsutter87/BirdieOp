@@ -10,12 +10,19 @@ router.use(function timeLog (req, res, next) {
   next()
 })
 
-// home page route
+/** Headers. */
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+/** Home Route */
 router.get('/', function (req, res) {
   res.send('Birdie OP home page')
 })
 
-// login route
+/** Login Route */
 router.post('/login', function (req, res) {
   let email = req.body.email;
 
@@ -47,7 +54,7 @@ router.post('/login', function (req, res) {
   })
 })
 
-// logout route
+/** Logout Route */
 router.get('/logout', function (req, res) {
   if(req.session.user == undefined){
       res.send('No user is logged in')
@@ -59,7 +66,7 @@ router.get('/logout', function (req, res) {
 
 })
 
-// dashboard route
+/** Dashboard Route */
 router.get('/dashboard', function (req, res) {
   if(!req.session.user){
     return res.status(404).send('Sign in to view desktop');

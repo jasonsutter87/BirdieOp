@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Round Schema
+/** Round Schema */
 const roundSchema = mongoose.Schema({
 	course:{
 		type: String
@@ -19,7 +19,7 @@ const roundSchema = mongoose.Schema({
 
 const Round = module.exports = mongoose.model('Round', roundSchema);
 
-//Round Controller
+/** Round Controller */
 module.exports.getRounds = (callback, limit) => {
 	Round.find(callback).limit(limit);
 }

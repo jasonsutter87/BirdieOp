@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Disc Schema
+/** Disc Schema */
 const discSchema = mongoose.Schema({
 	name:{
 		type: String
@@ -34,7 +34,7 @@ const discSchema = mongoose.Schema({
 
 const Disc = module.exports = mongoose.model('Disc', discSchema);
 
-//Disc Controller
+/** Disc Controller */
 module.exports.getDiscs = (callback, limit) => {
 	Disc.find(callback).limit(limit);
 }
@@ -57,7 +57,7 @@ module.exports.updateDisc = (id, disc, options, callback) => {
     speed: disc.speed,
     glide: disc.glide,
     turn: disc.turn,
-    fade: disc.fade    
+    fade: disc.fade
 	}
 	Disc.findOneAndUpdate(query, update, options, callback);
 }

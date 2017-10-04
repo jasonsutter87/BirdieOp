@@ -9,7 +9,15 @@ router.use(function timeLog (req, res, next) {
   next()
 })
 
-// Hole Routes
+
+/** Headers. */
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+/** Get Holes */
 router.get('/', (req, res) => {
 	Holes.getHoles((err, holes) => {
 		if(err){
@@ -18,6 +26,8 @@ router.get('/', (req, res) => {
 		res.json(holes)
 	})
 });
+
+/** Create a new Hole */
 router.post('/', (req, res) =>  {
 	let hole = req.body;
 	Holes.addHole(hole, (err, hole) => {
@@ -27,6 +37,8 @@ router.post('/', (req, res) =>  {
 		res.json(hole)
 	})
 });
+
+/** Get Hole by ID */
 router.get('/:_id', (req, res) => {
 	Holes.getHoleById(req.params._id, (err, hole) => {
 		if(err){
@@ -35,6 +47,8 @@ router.get('/:_id', (req, res) => {
 		res.json(hole)
 	})
 });
+
+/** Update Hole by ID */
 router.put('/:_id', (req, res) => {
 	const id = req.params._id;
 	const hole = req.body;
@@ -45,6 +59,8 @@ router.put('/:_id', (req, res) => {
 		res.json(hole)
 	})
 });
+
+/** Delete Hole by ID */
 router.delete('/:_id', (req, res) => {
 	const id = req.params._id;
 	Holes.removeHole(id, function(err, hole){
